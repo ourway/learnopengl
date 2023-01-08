@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Video Player</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		.video-container {
+			position: relative;
+			width: 100%;
+			height: 500px;
+		}
+		.video-container video {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+		.controls {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 50px;
+			background: rgba(0,0,0,0.5);
+			color: #fff;
+			padding: 0 10px;
+			box-sizing: border-box;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		.controls > button {
+			background: none;
+			border: none;
+			color: #fff;
+			font-size: 18px;
+			cursor: pointer;
+			outline: none;
+		}
+	</style>
+</head>
+<body>
+	<input type="file" id="file" />
+	<div class="video-container">
+		<video controls poster="" id="video" autoplay></video>
+		<div class="controls">
+			<button id="play">Play</button>
+			<button id="pause">Pause</button>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			$('#file').on('change', function(e) {
+				var file = e.target.files[0];
+
+				// create a URL of the file
+				var url = URL.createObjectURL(file);
+
+				// set the video source
+				$('#video').attr('src', url);
+			});
+
+			$('#play').click(function() {
+				$('#video')[0].play();
+			});
+
+			$('#pause').click(function() {
+				$('#video')[0].pause();
+			});
+		});
+	</script>
+</body>
+</html>
